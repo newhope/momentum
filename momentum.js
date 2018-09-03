@@ -97,7 +97,11 @@
 
     $momentum.worker.onmessage = function (e) {
         if (e.data.type === 'fire') {
-            $momentum.idToCallback[e.data.id]();
+            try {
+                $momentum.idToCallback[e.data.id]();
+            } catch (ex) {
+                console.info('momentum - invalid callback', e, ex);
+            }
         }
     };
 
